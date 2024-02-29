@@ -209,6 +209,17 @@ int ksu_handle_prctl(int option, unsigned long arg2, unsigned long arg3,
 		return 0;
 	}
 
+	if (arg2 == CMD_LOG) {
+		char logstr[256];
+		int loglen = arg4 > sizeof(logstr)-1 ? sizeof(logstr)-1 : arg4;
+		if (copy_from_user(logstr, arg3, loglen)) {
+			pr_info("CMD LOG copy error\n");
+		}else{
+			pr_info("%.*s\n", loglen, logstr);
+			return 0;
+		}
+	}
+
 	// always ignore isolated app uid
 	if (is_isolated_uid(current_uid().val)) {
 		return 0;

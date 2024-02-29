@@ -21,6 +21,13 @@ apksign {
 android {
     namespace = "me.weishu.kernelsu"
 
+    defaultConfig {
+        applicationId = "com.vdroid.manager"
+        minSdk = 28
+        targetSdk = 28
+        versionCode = 1
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -113,4 +120,6 @@ dependencies {
     implementation(libs.sheet.compose.dialogs.input)
 
     implementation(libs.markdown)
+
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
